@@ -1,0 +1,300 @@
+@import url(fonts.css);
+
+$background: #F3F8FC;
+$attention-background: #E7F1F9;
+$diagram-full-size: 160px;
+$diagram-full-line-size: 16px;
+$diagram-full-marker-size: 8px;
+$diagram-full-center-size: $diagram-full-size - 2 * $diagram-full-line-size;
+$diagram-center-color: #fff;
+$ability-color-1: #00A75C;
+$ability-color-2: #E9841D;
+$ability-color-3: #EC133D;
+$ability-color-4: #B6D4ED;
+
+$diagram-half-size: 200px;
+$diagram-half-line-size: 21px;
+$diagram-half-center-size: $diagram-half-size - 2 * $diagram-half-line-size;
+
+@mixin diagram-root {
+  border-radius: 100%;
+  overflow: hidden;
+  position: relative;
+  background: #E7F1F9;
+}
+
+@mixin diagram-center-wrapper {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 2;
+}
+
+@mixin diagram-center {
+  border-radius: 100%;
+  overflow: hidden;
+  // margin: auto;
+  background-color: $diagram-center-color;
+
+  font-size: 32px;
+  line-height: 40px;
+  vertical-align: middle;
+  text-align: center;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+* {
+  flex-shrink: 0;
+}
+
+body {
+  background: $background;
+  font-size: 14px;
+  line-height: 20px;
+  font-family: 'Stolzl';
+}
+
+.my-team {
+  width: fit-content;
+  margin: 0 auto;
+
+  &__header {
+    margin: 94px auto 24px 40px;
+    font-size: 24px;
+    line-height: 32px;
+    font-weight: 500;
+  }
+}
+
+#learning-ability {
+  width: fit-content;
+}
+
+.boxes {
+  display: flex;
+  gap: 20px;
+
+}
+
+.box {
+  padding: 40px;
+  border-radius: 40px;
+  background: #fff;
+  box-shadow: 0px 4px 4px -2px #18274B0A;
+  box-shadow: 0px 2px 4px -2px #18274B0F;
+
+
+  &__header {
+    font-size: 16px;
+    font-weight: 500;
+    margin: 0 0 20px
+  }
+
+  &__header-info {
+
+    margin-left: 8px;
+
+    img {
+      width: 16px;
+      height: 16px;
+      vertical-align: middle;
+    }
+  }
+
+  &__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+
+
+  &__list {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 0;
+  }
+
+  &__list-title {
+    font-weight: 500;
+  }
+
+  &__list-item {
+    display: flex;
+    align-items: center;
+    font-family: 'Verdana';
+    width: 183px;
+
+    &-marker {
+      width: $diagram-full-marker-size;
+      height: $diagram-full-marker-size;
+      background: black;
+      border-radius: 100%;
+    }
+
+    &:nth-child(1) &-marker {
+      background: $ability-color-1;
+    }
+
+    &:nth-child(2) &-marker {
+      background: $ability-color-2;
+    }
+
+    &:nth-child(3) &-marker {
+      background: $ability-color-3;
+    }
+
+    &:nth-child(4) &-marker {
+      background: $ability-color-4;
+    }
+
+    &-name {
+      margin: 0 auto 0 8px;
+    }
+
+    &-number {
+      opacity: 0.5;
+      margin-left: 4px;
+    }
+  }
+
+}
+
+.diagram-full {
+  width: $diagram-full-size;
+  height: $diagram-full-size;
+  @include diagram-root();
+
+
+  &__center-wrapper {
+    @include diagram-center-wrapper();
+  }
+
+  &__center {
+    width: $diagram-full-center-size;
+    height: $diagram-full-center-size;
+    @include diagram-center();
+  }
+
+  &__item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__item:nth-child(1) {
+    background-image: conic-gradient($ability-color-1 0deg 252deg, transparent);
+
+  }
+
+  &__item:nth-child(2) {
+    background-image: conic-gradient(transparent 252deg, $ability-color-2 252deg 288deg, transparent)
+  }
+
+  &__item:nth-child(3) {
+    background-image: conic-gradient(transparent 288deg, $ability-color-3 288deg 324deg, transparent)
+  }
+
+  &__item:nth-child(4) {
+    background-image: conic-gradient(transparent 324deg, $ability-color-4 324deg 360deg, transparent)
+  }
+
+}
+
+.diagram-half {
+  width: $diagram-half-size;
+  height: $diagram-half-size;
+  @include diagram-root();
+
+
+  &__center-wrapper {
+    @include diagram-center-wrapper();
+  }
+
+  &__center {
+    width: $diagram-half-center-size;
+    height: $diagram-half-center-size;
+    @include diagram-center();
+
+    &-text {
+      transform: translateY(-12px);
+    }
+  }
+
+  &__item {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+  }
+
+  &__item:nth-child(1) {
+    background-image: conic-gradient(transparent 270deg, $ability-color-2 270deg 342deg, transparent 342deg 360deg);
+
+  }
+
+  &__under {
+    position: absolute;
+    z-index: 3;
+    width: 100%;
+    height: 50%;
+    bottom: 0;
+    background: #fff;
+    text-align: center;
+
+    &-text {
+      padding: 0 7px 40px;
+    }
+  }
+
+}
+
+#progress-box {
+  padding-bottom: 0;
+}
+
+#attention-box.box {
+  padding-right: 50px;
+
+  .box {
+    &__list {
+      margin: 0;
+      gap: 12px;
+
+      &-item {
+        width: fit-content;
+        margin: 0;
+        padding: 4px 11px;
+        font-size: 12px;
+        border: 1px solid #E7F1F9;
+        border-width: 1px !important;
+        border-radius: 8px;
+        line-height: 18px;
+        gap: 0px;
+
+        &-marker {
+          width: 16px;
+          height: 16px;
+          margin-right: 6px;
+          background: url(../icons/attention.svg);
+        }
+
+        &-name {
+          margin: 0;
+        }
+
+        &-number {
+          margin: 0;
+          opacity: 1;
+        }
+      }
+    }
+  }
+}
